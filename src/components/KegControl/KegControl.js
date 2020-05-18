@@ -95,29 +95,22 @@ handleDecrementPint = () => {
       return pint;
     }
     return {
+    
       ...pint,
       count: pint.count - 1,
       // count: pint.count - 1 > 0
-      // doesn't work because count becomes a boolean value
+      // prevents count from going negative but doesn't work because count becomes a boolean value
     };
   });
   console.log(sellPint)
+  // I tried setting selectedKeg to sellPint to keep user on keg detail page after selling pint, but then I get an error saying keg is an invalid prop type of "object". The number also goes away on keg detail page.
   this.setState({ masterKegList: sellPint, editing: false, formVisibleOnPage: true, selectedKeg: sellPint });
 }
 
   render(){
 
     let currentlyVisibleState = null;
-    let buttonText = null; 
-    // let masterKegListDropDown = this.state.masterKegList
-    // let options =  masterKegListDropDown.map((data) =>
-    //         <option 
-    //             key={data.id}
-    //             value={data.id}
-    //         >
-    //             {data.name}
-    //         </option>
-    //     );
+    let buttonText = null;
 
   if (this.state.editing ) {      
       currentlyVisibleState = <EditKegForm keg = {this.state.selectedKeg} onEditKeg = {this.handleEditingKegInList} onClickingDecrement = {this.handleDecrementPint} onClick={this.handleClick} />
@@ -136,18 +129,6 @@ handleDecrementPint = () => {
       <React.Fragment>
       <Reveal>
       <div className="container">
-        {/* want to get back to this */}
-        {/* <form>
-          <label>Pick a Keg:</label>
-           <p className="App-intro">
-           <select name="customSearch" className="custom-search-select" onChange={this.handleChange}>
-                <option>Select Item</option>
-                {options}
-           </select>
-          </p>
-        </form> */}
-{/*         
-        <Button variant="primary" type="submit">See Keg</Button> */}
         {currentlyVisibleState}
         <Button variant="primary" onClick={this.handleClick}>{buttonText}</Button>
       </div>
