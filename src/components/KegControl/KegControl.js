@@ -57,14 +57,6 @@ class KegControl extends React.Component {
     this.setState({selectedKeg: selectedKeg});
   }
 
-  handleDeletingKeg = (id) => {
-  const newMasterKegList = this.state.masterKegList.filter(keg => keg.id !== id);
-  this.setState({
-    masterKegList: newMasterKegList,
-    selectedKeg: null
-  });
-}
-
 handleEditClick = () => {
   this.setState({editing: true});
 }
@@ -91,6 +83,7 @@ handleDeletingKeg = (id) => {
 
 handleDecrementPint = () => {
   const sellPint = this.state.masterKegList.map((pint) => {
+    console.log(pint.count)
     if (pint.id !== this.state.selectedKeg.id) {
       return pint;
     }
@@ -98,6 +91,26 @@ handleDecrementPint = () => {
     
       ...pint,
       count: pint.count - 1,
+      // count: pint.count - 1 > 0
+      // prevents count from going negative but doesn't work because count becomes a boolean value
+    };
+  });
+  console.log(sellPint)
+  // I tried setting selectedKeg to sellPint to keep user on keg detail page after selling pint, but then I get an error saying keg is an invalid prop type of "object". The number also goes away on keg detail page.
+  this.setState({ masterKegList: sellPint, editing: false, formVisibleOnPage: true, selectedKeg: sellPint });
+}
+
+
+handleDecrementPint = () => {
+  const sellPint = this.state.masterKegList.map((pint) => {
+    console.log(pint.count)
+    if (pint.id !== this.state.selectedKeg.id) {
+      return pint;
+    }
+    return {
+    
+      ...pint,
+      count: Math.max(pint.count - 1, 0),
       // count: pint.count - 1 > 0
       // prevents count from going negative but doesn't work because count becomes a boolean value
     };
