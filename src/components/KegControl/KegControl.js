@@ -92,8 +92,8 @@ handleDecrementPint = () => {
       count: Math.max(pint.count - 1, 0),
     };
   });
-  const updatedKeg = this.state.masterKegList.filter(pint => pint.id === this.state.selectedKeg.id)[0]; 
-  this.setState({ masterKegList: sellPint,  selectedKeg: updatedKeg });
+  const select = { ...this.state.selectedKeg, count: Math.max(this.state.selectedKeg.count - 1, 0) };
+  this.setState({ masterKegList: sellPint,  selectedKeg: select });
 }
 
   render(){
