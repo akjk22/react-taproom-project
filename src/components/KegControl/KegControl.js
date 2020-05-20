@@ -90,8 +90,6 @@ handleDecrementPint = () => {
     
       ...pint,
       count: Math.max(pint.count - 1, 0),
-      // count: pint.count - 1 > 0
-      // prevents count from going negative but doesn't work because count becomes a boolean value
     };
   });
   console.log(sellPint)
