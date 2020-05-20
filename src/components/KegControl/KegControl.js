@@ -92,9 +92,8 @@ handleDecrementPint = () => {
       count: Math.max(pint.count - 1, 0),
     };
   });
-  console.log(sellPint)
-  // I tried setting selectedKeg to sellPint to keep user on keg detail page after selling pint, but then I get an error saying keg is an invalid prop type of "object". The number also goes away on keg detail page.
-  this.setState({ masterKegList: sellPint });
+  const updatedKeg = this.state.masterKegList.filter(pint => pint.id === this.state.selectedKeg.id)[0]; 
+  this.setState({ masterKegList: sellPint,  selectedKeg: updatedKeg });
 }
 
   render(){
