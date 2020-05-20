@@ -94,7 +94,7 @@ handleDecrementPint = () => {
   });
   console.log(sellPint)
   // I tried setting selectedKeg to sellPint to keep user on keg detail page after selling pint, but then I get an error saying keg is an invalid prop type of "object". The number also goes away on keg detail page.
-  this.setState({ masterKegList: sellPint, editing: false, formVisibleOnPage: true, selectedKeg: sellPint });
+  this.setState({ masterKegList: sellPint });
 }
 
   render(){
